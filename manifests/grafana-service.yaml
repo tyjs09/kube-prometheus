@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: grafana
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 8.3.3
+  name: grafana
+  namespace: monitoring
+spec:
+  type: NodePort #新增
+  ports:
+  - name: http
+    port: 3000
+    targetPort: http
+    nodePort: 32000 #新增
+  selector:
+    app.kubernetes.io/component: grafana
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/part-of: kube-prometheus
